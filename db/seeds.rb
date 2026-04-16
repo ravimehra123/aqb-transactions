@@ -7,3 +7,19 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Transaction.destroy_all
+
+categories = %w[food transport utilities entertainment health other]
+statuses = %w[settled pending]
+
+10.times do |i|
+  Transaction.create!(
+    description: "Transaction #{i + 1}",
+    amount: rand(-500..500),
+    category: categories.sample,
+    status: statuses.sample
+  )
+end
+
+puts "Seeded #{Transaction.count} transactions"
